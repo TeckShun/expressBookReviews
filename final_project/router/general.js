@@ -166,46 +166,46 @@ public_users.get('/title/:title', function (req, res) {
 });
 
 
-// // Get all books based on title
-// public_users.get('/title/:title', async function (req, res) {
-//   const title = req.params.title;
+// Get all books based on title
+public_users.get('/title/:title', async function (req, res) {
+  const title = req.params.title;
 
-//   try {
-//     const response = await axios.get(`http://localhost:5000/books/title/${title}`); // URL to fetch books by title
-//     const booksByTitle = response.data;
+  try {
+    const response = await axios.get(`http://localhost:5000/books/title/${title}`); // URL to fetch books by title
+    const booksByTitle = response.data;
 
-//     if (booksByTitle.length > 0) {
-//       return res.status(200).json(booksByTitle);
-//     } else {
-//       return res.status(404).json({ message: "No books found with this title" });
-//     }
-//   } catch (error) {
-//     return res.status(500).json({ message: "Error fetching books by title" });
-//   }
-// });
-
-
-
-public_users.get('/review/:isbn', function (req, res) {
-  // Retrieve ISBN from the request parameters
-  const isbn = req.params.isbn;
-
-  // Find the book in the books object using the ISBN
-  const book = books[isbn];
-
-  if (book) {
-    // Check if reviews exist for the book
-    if (book.reviews) {
-      // Return the book's reviews
-      return res.status(200).json(book.reviews);
+    if (booksByTitle.length > 0) {
+      return res.status(200).json(booksByTitle);
     } else {
-      // If the book has no reviews
-      return res.status(404).json({ message: "No reviews available for this book" });
+      return res.status(404).json({ message: "No books found with this title" });
     }
-  } else {
-    // If the book is not found
-    return res.status(404).json({ message: "Book not found" });
+  } catch (error) {
+    return res.status(500).json({ message: "Error fetching books by title" });
   }
 });
+
+
+
+// public_users.get('/review/:isbn', function (req, res) {
+//   // Retrieve ISBN from the request parameters
+//   const isbn = req.params.isbn;
+
+//   // Find the book in the books object using the ISBN
+//   const book = books[isbn];
+
+//   if (book) {
+//     // Check if reviews exist for the book
+//     if (book.reviews) {
+//       // Return the book's reviews
+//       return res.status(200).json(book.reviews);
+//     } else {
+//       // If the book has no reviews
+//       return res.status(404).json({ message: "No reviews available for this book" });
+//     }
+//   } else {
+//     // If the book is not found
+//     return res.status(404).json({ message: "Book not found" });
+//   }
+// });
 
 module.exports.general = public_users;
